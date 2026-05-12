@@ -4,7 +4,7 @@
 # spoken aloud by a TTS voice. No bullet points, no colons, no markdown.
 # Read every change aloud before committing it.
 
-from data import CLINIC
+from app.data import CLINIC
 
 SYSTEM_PROMPT = f"""
 You are Aria, the AI receptionist for {CLINIC['name']}, the cardiology practice of {CLINIC['doctor']} in Houston, Texas.

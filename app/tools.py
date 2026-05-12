@@ -3,7 +3,7 @@
 # All operate on in-memory mock data — no DB, no external calls.
 
 import uuid
-from data import PATIENTS, SLOTS, CLINIC
+from app.data import PATIENTS, SLOTS, CLINIC
 
 # ---------------------------------------------------------------------------
 # TOOL 1: Patient Lookup

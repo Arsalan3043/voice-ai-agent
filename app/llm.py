@@ -5,9 +5,11 @@
 
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from openai import AsyncOpenAI
-from prompt import SYSTEM_PROMPT
-from tools import TOOL_DEFINITIONS, run_tool
+from app.prompt import SYSTEM_PROMPT
+from app.tools import TOOL_DEFINITIONS, run_tool
 
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

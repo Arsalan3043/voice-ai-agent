@@ -8,7 +8,7 @@ import logging
 from dotenv import load_dotenv
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from llm import stream_response
+from app.llm import stream_response
 
 load_dotenv()
 
