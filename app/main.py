@@ -55,10 +55,10 @@ async def health():
 # Every time the caller finishes speaking, Retell sends a response_required
 # event with the full conversation history. We stream tokens back immediately.
 
-@app.websocket("/llm-websocket")
-async def llm_websocket(websocket: WebSocket):
+@app.websocket("/llm-websocket/{call_id}")
+async def llm_websocket(websocket: WebSocket, call_id: str):
     await websocket.accept()
-    log.info("📞  Call started — WebSocket connected")
+    log.info(f"📞  Call started — call_id={call_id}")
 
     # Track the active response_id so we can detect barge-in.
     # If Retell sends a new response_required while we are still streaming,
@@ -146,6 +146,12 @@ async def llm_websocket(websocket: WebSocket):
             if event_type == "call_ended":
                 log.info("📴  Call ended")
                 break
+
+            # ----------------------------------------------------------------
+            # UPDATE ONLY — live transcript update while user is speaking
+            # ----------------------------------------------------------------
+            if event_type == "update_only":
+                continue   # nothing to do, Retell is just keeping us in sync
 
             # ----------------------------------------------------------------
             # UNKNOWN EVENT — log and ignore

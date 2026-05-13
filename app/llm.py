@@ -35,9 +35,15 @@ async def stream_response(conversation_history: list):
     # Build the messages array for OpenAI.
     # Retell sends history in OpenAI format already — role + content pairs.
     # We just prepend the system prompt.
+    # Retell uses "agent" for assistant turns — remap to "assistant" for OpenAI
+    remapped_history = [
+        {**msg, "role": "assistant"} if msg.get("role") == "agent" else msg
+        for msg in conversation_history
+    ]
+
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
-        *conversation_history,
+        *remapped_history,
     ]
 
     # Keep looping to handle chained tool calls.
