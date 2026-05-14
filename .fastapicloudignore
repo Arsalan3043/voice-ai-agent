@@ -1,0 +1,7 @@
+voiceai/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.venv/
+venv/
